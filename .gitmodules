@@ -1,0 +1,9 @@
+[submodule "lab2/vendor/submodules/fmt"]
+	path = lab2/vendor/submodules/fmt
+	url = https://github.com/fmtlib/fmt.git
+[submodule "lab2/vendor/submodules/cli"]
+	path = lab2/vendor/submodules/cli
+	url = https://github.com/daniele77/cli.git
+[submodule "lab2/vendor/submodules/spdlog"]
+	path = lab2/vendor/submodules/spdlog
+	url = https://github.com/gabime/spdlog.git
