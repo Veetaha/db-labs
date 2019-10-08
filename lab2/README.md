@@ -4,6 +4,8 @@
 
 * conan
 * premake5
+* docker
+* docker-compose
 
 ## Bootstrap
 
