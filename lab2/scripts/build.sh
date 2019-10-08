@@ -1,1 +1,1 @@
-premake5 gmake2 && make config=debug
+bin/premake5 gmake && make verbose=1 config=debug

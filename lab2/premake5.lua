@@ -15,7 +15,7 @@ project "lab2"
     pchsource "src/pch.cpp"
     forceincludes { "%{prj.pchheader}" }
 
-    files { "src/**.cpp", "emu/**.cpp" }
+    files { "src/**.cpp" }
 
     includedirs {
         "include",
@@ -29,7 +29,7 @@ project "lab2"
         "vendor/submodules/spdlog/build"
     }
 
-    links { 
+    links {
         "boost_system",
         "boost_thread",
         "pthread",
