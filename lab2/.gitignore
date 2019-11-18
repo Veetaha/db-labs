@@ -1,9 +1,3 @@
-node_modules/
-bin/
-build*/
-dist/
-coverage/
-conan/
-.vscode
-logs/
-Makefile
+target/
+.vscode/
+.env
