@@ -7,15 +7,18 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+tokio = "0.1.22"
 actix = "0.8.3"
-structopt = "0.3.4"
-anyhow = "1.0.20"
-thiserror = "1.0.5"
+structopt = "0.3.5"
+anyhow = "1.0.23"
+thiserror = "1.0.6"
 indicatif = "0.13.0"
 dotenv = "0.15.0"
 exitcode = "1.1.2"
 human-panic = "1.0.1"
-diesel = { version = "1.4.3", features = ["postgres"] }
+chrono = "0.4.9"
+diesel = { version = "1.4.3", features = ["postgres", "chrono", "r2d2"] }
+diesel-derive-enum = { version = "0.4.4", features = ["postgres"] }
 serde = "1.0.102"
 serde_derive = "1.0.102"
 envy = "0.4.0"

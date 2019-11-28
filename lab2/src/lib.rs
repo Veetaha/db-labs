@@ -14,8 +14,12 @@
  */
 mod config;
 mod controllers;
-mod view;
+mod views;
 mod models;
+pub(crate) mod schema;
+
+#[macro_use]
+extern crate diesel;
 
 /*
  * pub(crate) correspons to `internal` C# visibility qualifier.
@@ -25,7 +29,7 @@ mod models;
  *  pub(super) - visible in the parent module
  *  pub(models::news) - visible only in models::news module
  */
-pub(crate) use view::*;
-pub(crate) use models::*;
+pub(crate) use views::*;
+pub use models::*;
 pub use controllers::*;
 pub use config::*;

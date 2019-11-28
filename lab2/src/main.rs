@@ -1,14 +1,6 @@
-// use std::io;
-// use actix::prelude::*;
-// use indicatif::ProgressBar;
-
-use diesel::prelude::*;
-use diesel::pg::PgConnection;
-use std::process;
+use std::{process, time::Duration};
 use dotenv::dotenv;
 use structopt::StructOpt;
-
-
 
 /*
  * Some aspects of this application were inspired by the awesome guide on
@@ -16,6 +8,9 @@ use structopt::StructOpt;
  * https://rust-lang-nursery.github.io/cli-wg/index.html
  */ 
 fn main() {
+    // TODO: remove
+    dbg!(std::mem::size_of::<lab2::cli::Params>());
+
     /* 
      * Set up the panic handler to print a human-readable error message to the terminal
      * and write the termination backtrace log to a temporary file.
@@ -46,16 +41,26 @@ fn main() {
      * workflow. This means the following statement never returns if no valid
      * parameters were read from the prompt.
      */  
-    let cli_params = lab2::CliParams::from_args();
+    let cli_params = lab2::cli::Params::from_args();
 
-    let db_conn = PgConnection::establish(&config.database_url).unwrap_or_else(|_| {
-        // Don't expose database_url since it may expose user credentials.
-        eprintln!(
-            "Failed to establish connection with PostgreSQL, please check the \
-             validity of DATABASE_URL evironment variable."
-        );
-        process::exit(exitcode::UNAVAILABLE);
-    });
+    use lab2::{PgConnPool, PgConnManager};
 
-    lab2::run(db_conn, cli_params);
+    let db_conn_pool = PgConnPool::builder()
+        .max_size(1)
+        .connection_timeout(Duration::from_millis(5000))
+        .build(PgConnManager::new(config.database_url)).unwrap_or_else(|err| {
+        // Don't expose database_url since it may contain user credentials.
+
+            eprintln!(
+                "Failed to establish connection with PostgreSQL, please check the \
+                validity of DATABASE_URL evironment variable or your nerwork connection: {}",
+                err
+            );
+            process::exit(exitcode::UNAVAILABLE);
+        });
+
+    if let Err(err) = lab2::run(db_conn_pool, cli_params) {
+        eprintln!("Error: {}", err);
+        process::exit(exitcode::SOFTWARE);
+    }
 }
