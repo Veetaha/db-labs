@@ -5,3 +5,7 @@ pub trait EntityService {
 pub trait UpdatableEntityService {
     type EntityUpd;
 }
+
+pub trait CreatableEntityService {
+    type EntityNew;
+}

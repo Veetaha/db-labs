@@ -16,6 +16,8 @@ dotenv = "0.15.0"
 exitcode = "1.1.2"
 human-panic = "1.0.1"
 chrono = "0.4.10"
+bcrypt = "0.6.1"
+soa_derive = "0.8.0"
 r2d2 = "0.8.7"
 fallible-iterator = "0.2.0"
 pg = { package = "postgres", version = "0.17.0-alpha.2" }

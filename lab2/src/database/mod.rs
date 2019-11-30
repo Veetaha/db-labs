@@ -1,6 +1,8 @@
 mod pg_conn_mgr;
+mod pg_placeholders_seq;
 
 pub use pg_conn_mgr::*;
+pub use pg_placeholders_seq::*;
 
 use pg::tls::NoTls;
 

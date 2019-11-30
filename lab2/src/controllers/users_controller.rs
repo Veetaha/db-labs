@@ -1,4 +1,4 @@
-use anyhow::{anyhow, Context};
+use anyhow::Context;
 
 use crate::{
     models::{
@@ -28,7 +28,7 @@ impl UserController {
         }
     }
 
-    pub fn create(&self, input_user: &cli::CreateUser) {
+    pub fn create(&self, input_user: cli::UserNew) {
         let user = self.users.create(input_user)
             .context("user service failed to create user");
 
@@ -38,7 +38,7 @@ impl UserController {
         }
     }
 
-    pub fn update(&self, user_update: &cli::UserUpdate) {
+    pub fn update(&self, user_update: cli::UserUpdate) {
         let user = self.users.update_by_id(user_update)
             .context("user service failed to update user");
 

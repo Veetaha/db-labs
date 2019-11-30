@@ -1,6 +1,6 @@
 use structopt::{StructOpt, clap::ArgGroup};
 
-use crate::models::traits::{GetColUpds, ColUpd, GetId};
+use crate::models::traits::{ColData, ColDataVec, GetId};
 use super::enums::UserRole;
 
 #[derive(StructOpt, Debug)]
@@ -45,28 +45,23 @@ impl GetId for UserUpdate {
     fn get_id(&self) -> i32 { self.id }
 }
 
-impl GetColUpds for UserUpdate {
+impl From<UserUpdate> for ColDataVec {
 
-    fn get_col_upds(&self) -> Vec<ColUpd<'_>> {
+    fn from(UserUpdate { data, .. }: UserUpdate) -> Self {
         use pg::types::ToSql;
 
-        fn try_push<'a, T: ToSql>(
-            col_upds: &mut Vec<ColUpd<'a>>,
-            col: &'a str,
-            val: &'a Option<T>
-        ) {
+        fn try_push<T: 'static + ToSql>(col_upds: &mut ColDataVec, col: &str, val: Option<T>) {
             if let Some(val) = val {
-                col_upds.push(ColUpd { col, val });
+                col_upds.push(ColData::with_boxed(col, val));
             }
         }
 
-        let mut result = Vec::with_capacity(4);
-        let data = &self.data;
+        let mut result = Self::new();
 
-        try_push(&mut result, "avatar_img_id", &data.avatar_img_id);
-        try_push(&mut result, "login", &data.login);
-        try_push(&mut result, "name", &data.name);
-        try_push(&mut result, "role", &data.role);
+        try_push(&mut result, "avatar_img_id", data.avatar_img_id);
+        try_push(&mut result, "login", data.login);
+        try_push(&mut result, "name", data.name);
+        try_push(&mut result, "role", data.role);
         
         return result;
     }

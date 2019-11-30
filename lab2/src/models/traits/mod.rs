@@ -1,4 +1,5 @@
-mod get_col_upds;
+mod create;
+mod col_data;
 mod get_id;
 mod get_by_id;
 mod get_pg_client;
@@ -8,8 +9,8 @@ mod delete_by_id;
 mod update_by_id;
 mod entity_service;
 
-
-pub use get_col_upds::*;
+pub use create::*;
+pub use col_data::*;
 pub use get_id::*;
 pub use get_by_id::*;
 pub use get_pg_client::*;
