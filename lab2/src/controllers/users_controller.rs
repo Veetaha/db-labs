@@ -20,10 +20,7 @@ impl UserController {
 
     pub fn get_by_id(&self, id: i32) {
         let user = self.users.get_by_id(id)
-            .context("user service failed to fetch user")
-            .and_then(|maybe_user| maybe_user.ok_or_else(
-                || anyhow!("user with the given id was not found")
-            ));
+            .context("user service failed to fetch user");
         
         match &user {
             Ok(user) => views::display_user_by_id(user),
@@ -42,7 +39,7 @@ impl UserController {
     }
 
     pub fn update(&self, user_update: &cli::UserUpdate) {
-        let user = self.users.update(user_update)
+        let user = self.users.update_by_id(user_update)
             .context("user service failed to update user");
 
         match &user {

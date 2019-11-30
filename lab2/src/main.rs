@@ -8,17 +8,17 @@ use structopt::StructOpt;
  * https://rust-lang-nursery.github.io/cli-wg/index.html
  */ 
 fn main() {
-    // TODO: remove
-    dbg!(std::mem::size_of::<lab2::cli::Params>());
 
-    /* 
+    /*
      * Set up the panic handler to print a human-readable error message to the terminal
      * and write the termination backtrace log to a temporary file.
      * This reads cargo metadata such as the application and author name at
      * compile time and displays it when the `panic!()` macro invokation was hit
      * by the workflow.
      */
-    human_panic::setup_panic!();
+    if !cfg!(debug_assertions) { // conditional compile this for production only
+        human_panic::setup_panic!();
+    }
 
     if !dotenv().is_ok() {
         eprintln!("Failed to load \".env\" file, please put one in your current working directory");
@@ -43,23 +43,32 @@ fn main() {
      */  
     let cli_params = lab2::cli::Params::from_args();
 
-    use lab2::{PgConnPool, PgConnManager};
+    let timeout = Duration::from_millis(config.db_connect_timeout);
 
-    let db_conn_pool = PgConnPool::builder()
+    let mut pg_config = pg::Config::new();
+    pg_config
+        .host(&config.db_host)
+        .dbname(&config.db_db)
+        .user(&config.db_user)
+        .port(config.db_port)
+        .password(config.db_password)
+        .connect_timeout(timeout);
+
+    let pool = r2d2::Pool::builder()
+        .connection_timeout(timeout)
         .max_size(1)
-        .connection_timeout(Duration::from_millis(5000))
-        .build(PgConnManager::new(config.database_url)).unwrap_or_else(|err| {
-        // Don't expose database_url since it may contain user credentials.
-
+        .build(lab2::PgConnMgr::new(pg_config, pg::NoTls))
+        .unwrap_or_else(|err| {
             eprintln!(
-                "Failed to establish connection with PostgreSQL, please check the \
-                validity of DATABASE_URL evironment variable or your nerwork connection: {}",
+                "Failed to establish connection to database, please check the \
+                correctness of configuration evironment variables or your \
+                nerwork connection: {}",
                 err
             );
             process::exit(exitcode::UNAVAILABLE);
         });
 
-    if let Err(err) = lab2::run(db_conn_pool, cli_params) {
+    if let Err(err) = lab2::run(pool, cli_params) {
         eprintln!("Error: {}", err);
         process::exit(exitcode::SOFTWARE);
     }

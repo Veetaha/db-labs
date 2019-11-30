@@ -4,19 +4,16 @@ pub mod cli;
 use anyhow::Result;
 use users_controller::{UserController};
 use crate::{
-    models::{
-        PgConnPool,
-    },
-    services::UserService
+    services::UserService,
+    database::PgConnPool
 };
 
-/**
+/*
  * Composition and execution root.
  */
 pub fn run(pg_conn_pool: PgConnPool, params: cli::Params) -> Result<()> {
 
-    let pg_conn = || PgConnPool::clone(&pg_conn_pool);
-    let user_controller = || UserController::new(UserService::new(pg_conn()));
+    let user_controller = || UserController::new(UserService::new(pg_conn_pool));
 
     use cli::{Params as P, EntityType as ET, Get, Create, Update, Delete};
 

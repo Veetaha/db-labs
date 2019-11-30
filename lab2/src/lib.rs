@@ -16,10 +16,8 @@ mod config;
 mod controllers;
 mod views;
 mod models;
-pub(crate) mod schema;
+mod database;
 
-#[macro_use]
-extern crate diesel;
 
 /*
  * pub(crate) correspons to `internal` C# visibility qualifier.
@@ -33,3 +31,4 @@ pub(crate) use views::*;
 pub use models::*;
 pub use controllers::*;
 pub use config::*;
+pub use database::*;

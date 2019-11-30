@@ -1,5 +1,7 @@
-use diesel::{pg::Pg, deserialize::QueryableByName};
-
 pub trait EntityService {
-    type Entity: QueryableByName<Pg>;
+    type Entity: From<pg::row::Row>;
+}
+
+pub trait UpdatableEntityService {
+    type EntityUpd;
 }
