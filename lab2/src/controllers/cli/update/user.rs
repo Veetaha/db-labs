@@ -1,12 +1,9 @@
-use structopt::{StructOpt, clap::ArgGroup};
+use structopt::StructOpt;
 
-use crate::models::traits::{ColData, ColDataVec, GetId};
-use super::enums::UserRole;
-
-#[derive(StructOpt, Debug)]
-pub enum Update {
-    User(UserUpdate)
-}
+use crate::{
+    cli::enums::UserRole,
+    models::traits::{ColData, ColDataVec, GetId}
+};
 
 #[derive(StructOpt, Debug)]
 pub struct UserUpdate {
@@ -17,8 +14,8 @@ pub struct UserUpdate {
     pub data: UserUpdateData
 }
 
+// TODO: add ArgGroup once this bug is fixed: https://github.com/TeXitoi/structopt/issues/151
 #[derive(StructOpt, Debug)]
-#[structopt(group = ArgGroup::with_name("user_update_data").required(true))]
 pub struct UserUpdateData {
     /// Set new avatar image id (remove avatar if value is omitted)
     #[structopt(long)]
@@ -48,21 +45,13 @@ impl GetId for UserUpdate {
 impl From<UserUpdate> for ColDataVec {
 
     fn from(UserUpdate { data, .. }: UserUpdate) -> Self {
-        use pg::types::ToSql;
+        let mut cols = Self::new();
 
-        fn try_push<T: 'static + ToSql>(col_upds: &mut ColDataVec, col: &str, val: Option<T>) {
-            if let Some(val) = val {
-                col_upds.push(ColData::with_boxed(col, val));
-            }
-        }
-
-        let mut result = Self::new();
-
-        try_push(&mut result, "avatar_img_id", data.avatar_img_id);
-        try_push(&mut result, "login", data.login);
-        try_push(&mut result, "name", data.name);
-        try_push(&mut result, "role", data.role);
+        ColData::try_push(&mut cols, "avatar_img_id", data.avatar_img_id);
+        ColData::try_push(&mut cols, "login",         data.login);
+        ColData::try_push(&mut cols, "name",          data.name);
+        ColData::try_push(&mut cols, "role",          data.role);
         
-        return result;
+        return cols;
     }
 }

@@ -1,20 +1,27 @@
 use structopt::StructOpt;
 
 #[derive(StructOpt, Debug)]
-pub struct News {
+pub struct NewsSearch {
 
     /// Set the minimum amount of likes under the news to be returned
     #[structopt(long)]
-    min_likes: Option<u32>,
+    pub min_likes: Option<u32>,
 
     /// Set the maximum amount of likes under the news to be returned
     #[structopt(long)]
-    max_likes: Option<u32>,
+    pub max_likes: Option<u32>,
 
     /// Sets the enumeration of possible titles that the returned news must have
-    #[structopt(short, long)]
-    title: Vec<String>,
+    #[structopt(long)]
+    pub title: Option<Vec<String>>,
 
-    /// Any string be used in fulltext search query by news body
-    body: String
+    /// Any string to be used in fulltext search query, such that
+    /// news that contain it should be excluded from result set
+    #[structopt(long)]
+    pub body: Option<String>,
+
+    /// Any string to be used in fulltext search query, such that
+    /// news that contain it should be excluded from result set
+    #[structopt(long)]
+    pub not_body: Option<String>
 }

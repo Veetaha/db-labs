@@ -22,6 +22,7 @@ where
 {
 
     fn update_by_id(&self, upd: Self::EntityUpd) -> Result<Self::Entity> {
+        let id = upd.get_id();
         let col_datas: ColDataVec = upd.into();
         
         if col_datas.is_empty() {
@@ -29,9 +30,10 @@ where
         }
 
         let query = format!(
-            "update {} set {} returning *;",
-            self.get_table_name(),
-            col_datas.col.iter()
+            "update {table} set {assignments} where id = {id} returning *;",
+            table = self.get_table_name(),
+            id = id,
+            assignments = col_datas.col.iter()
                 .enumerate()
                 .map(|(i, col_name)| format!("{} = ${}", col_name, i + 1))
                 .collect::<Vec<_>>()

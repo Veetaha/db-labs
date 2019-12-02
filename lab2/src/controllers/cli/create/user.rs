@@ -1,12 +1,9 @@
 use structopt::StructOpt;
 
-use super::enums::UserRole;
-use crate::models::traits::{ColData, ColDataVec};
-
-#[derive(StructOpt, Debug)]
-pub enum Create {
-    User(UserNew)
-}
+use crate::{
+    cli::UserRole,
+    models::traits::{ColData, ColDataVec}
+};
 
 #[derive(StructOpt, Debug)]
 pub struct UserNew {
@@ -44,15 +41,15 @@ impl From<UserNew> for ColDataVec {
             "Some precondition of password hash algorithm was violated"
         );
 
-        let mut result = Self::new();
+        let mut cols = Self::new();
 
-        result.push(ColData::with_boxed("password_hash", password_hash));
-        result.push(ColData::with_boxed("avatar_img_id", new_user.avatar_img_id));
-        result.push(ColData::with_boxed("login",         new_user.login));
-        result.push(ColData::with_boxed("name",          new_user.name));
-        result.push(ColData::with_boxed("role",          new_user.role));
+        cols.push(ColData::with_boxed("password_hash", password_hash));
+        cols.push(ColData::with_boxed("avatar_img_id", new_user.avatar_img_id));
+        cols.push(ColData::with_boxed("login",         new_user.login));
+        cols.push(ColData::with_boxed("name",          new_user.name));
+        cols.push(ColData::with_boxed("role",          new_user.role));
 
-        result
+        cols
     }
 
 }
