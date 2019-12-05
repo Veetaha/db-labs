@@ -1,18 +1,26 @@
-// use diesel::{QueryableByName};
-// use diesel_derive_enum::DbEnum;
+use pg::row::Row as PgRow;
+use postgres_types::{ToSql, FromSql};
 
-// use crate::schema::news_ratings;
+#[derive(Debug, ToSql, FromSql)]
+#[postgres(name="ratingvalue")]
+pub enum RatingValue {
+    Like, Dislike
+}
 
-// #[derive(Debug, DbEnum)]
-// pub enum RatingValue {
-//     Like, Dislike
-// }
+#[derive(Debug)]
+pub struct NewsRating {
+    pub id: i32,
+    pub rater_id: i32,
+    pub news_id: i32,
+    pub value: RatingValue
+}
 
-// #[derive(QueryableByName, Debug)]
-// #[table_name = "news_ratings"]
-// pub struct NewsRating {
-//     pub id: i32,
-//     pub rater_id: i32,
-//     pub news_id: i32,
-//     pub value: RatingValue
-// }
+
+impl From<PgRow> for NewsRating {
+    fn from(row: PgRow) -> Self { Self {
+        id:       row.get("id"),
+        rater_id: row.get("rater_id"),
+        news_id:  row.get("news_id"),
+        value:    row.get("value"),
+    }}
+}

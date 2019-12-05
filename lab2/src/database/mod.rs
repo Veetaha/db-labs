@@ -1,8 +1,10 @@
 mod pg_conn_mgr;
 mod pg_placeholders_seq;
+mod sql_params;
 
 pub use pg_conn_mgr::*;
 pub use pg_placeholders_seq::*;
+pub use sql_params::*;
 
 use pg::tls::NoTls;
 

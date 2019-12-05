@@ -23,7 +23,7 @@ where
             "insert into {table} ({cols}) values ({values}) returning *;",
             table = self.get_table_name(),
             cols = col_datas.col.join(","),
-            values = PgPlaceholdersSeq(col_datas.len())
+            values = PgPlaceholdersSeq::new(1..=col_datas.len())
         );
 
         use fallible_iterator::FallibleIterator;

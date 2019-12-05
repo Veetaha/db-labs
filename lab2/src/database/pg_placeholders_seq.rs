@@ -1,14 +1,24 @@
 use std::fmt;
+use std::ops::RangeInclusive;
 
-pub struct PgPlaceholdersSeq(pub usize);
+pub struct PgPlaceholdersSeq(RangeInclusive<usize>);
+
+impl PgPlaceholdersSeq {
+    pub fn new(range: RangeInclusive<usize>) -> Self { Self(range) }
+}
 
 impl fmt::Display for PgPlaceholdersSeq {
 
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        if self.0 == 0 { return Ok(()); }
+        let start = *self.0.start();
+        let end   = *self.0.end();
 
-        write!(f, "$1")?;
-        for i in 2..=self.0 { write!(f, ",${}", i)? }
+        if start > end { return Ok(()); }
+
+        write!(f, "${}", start)?;
+        for i in (start + 1)..=end {
+            write!(f, ",${}", i)?
+        }
 
         Ok(())
     }

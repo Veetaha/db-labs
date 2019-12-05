@@ -5,11 +5,11 @@ pub struct NewsSearch {
 
     /// Set the minimum amount of likes under the news to be returned
     #[structopt(long)]
-    pub min_likes: Option<u32>,
+    pub min_likes: Option<i32>,
 
     /// Set the maximum amount of likes under the news to be returned
     #[structopt(long)]
-    pub max_likes: Option<u32>,
+    pub max_likes: Option<i32>,
 
     /// Sets the enumeration of possible titles that the returned news must have
     #[structopt(long)]
