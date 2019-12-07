@@ -1,13 +1,15 @@
 mod users_controller;
 mod news_controller;
+mod global_controller;
 pub mod cli;
 
 use anyhow::Result;
 
 use users_controller::UserController;
 use news_controller::NewsController;
+use global_controller::GlobalController;
 use crate::{
-    services::{UserService, NewsService},
+    services::{UserService, NewsService, GlobalDbService},
     database::PgConnPool
 };
 
@@ -15,9 +17,9 @@ use crate::{
  * Composition and execution root.
  */
 pub fn run(pg_conn_pool: PgConnPool, params: cli::Params) -> Result<()> {
-
-    let user_controller = || UserController::new(UserService::new(pg_conn_pool.clone()));
-    let news_controller = || NewsController::new(NewsService::new(pg_conn_pool.clone()));
+    let global_controller = || GlobalController::new(GlobalDbService::new(PgConnPool::clone(&pg_conn_pool)));
+    let user_controller   = || UserController  ::new(UserService    ::new(PgConnPool::clone(&pg_conn_pool)));
+    let news_controller   = || NewsController  ::new(NewsService    ::new(PgConnPool::clone(&pg_conn_pool)));
 
     use cli::{
         Params as P,
@@ -39,6 +41,8 @@ pub fn run(pg_conn_pool: PgConnPool, params: cli::Params) -> Result<()> {
         P::Update(Update::News(upd)) => news_controller().update(upd),
         
         P::Search(Search::News(news_search)) => news_controller().search(&news_search),
+    
+        P::PushRandomEntities(opts) => global_controller().push_random_entities(opts),
 
         _ => unimplemented!()
     }
