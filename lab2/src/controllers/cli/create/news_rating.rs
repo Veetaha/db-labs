@@ -25,13 +25,9 @@ impl From<NewsRatingNew> for ColDataVec {
 
         cols.push(ColData::with_boxed("rater_id", new_rating.rater_id));
         cols.push(ColData::with_boxed("news_id",  new_rating.news_id));
-        cols.push(ColData::with_boxed("like", {
-            use crate::models::entities::RatingValue;
-            if new_rating.like {
-                RatingValue::Like
-            } else {
-                RatingValue::Dislike
-            }
+        cols.push(ColData::with_boxed("value", {
+            use crate::models::entities::RatingValue::{Like, Dislike};
+            if new_rating.like { Like } else { Dislike }
         }));
 
         cols

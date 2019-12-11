@@ -1,6 +1,9 @@
-use crate::models::entities::News;
+use crate::models::{
+    services::NewsSearchResultRef,
+    entities::News
+};
 
-pub fn display_found_news<'a>(news: impl Iterator<Item = &'a News>) {
+pub fn display_found_news<'a>(news: impl Iterator<Item = NewsSearchResultRef<'a>>) {
     println!("Successfully found news:");
     // TODO: Add fulltext query fragment emphasis
     for item in news {

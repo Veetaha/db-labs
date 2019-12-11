@@ -1,19 +1,29 @@
-// use crate::models::{
-//     PgConnPool,
-//     entities::{NewsRating},
-//     traits::{GetTableName, GetPgConnPool, GetPgConnFromPoolInfallible, GetById}
-// };
 
-// pub struct NewsRatingService {
-//     pg_conn_pool: PgConnPool
-// }
+use crate::{
+    models::{
+        entities::NewsRating,
+        traits
+    },
+    cli::{ NewsRatingNew },
+    database::PgConnPool
+};
 
-// impl NewsRatingService {
-//     pub fn new(pg_conn_pool: PgConnPool) -> Self {
-//         Self { pg_conn_pool }
-//     }
-// }
+pub struct NewsRatingService {
+    pg_conn_pool: PgConnPool
+}
 
-// impl GetTableName for NewsRatingService { fn get_table_name(&self) -> &str { "news_ratings" } }
-// impl GetPgConnPool for NewsRatingService { fn get_pg_conn_pool(&self) -> PgConnPool { self.pg_conn_pool.clone() } }
-// impl GetPgConnFromPoolInfallible for NewsRatingService {}
+impl NewsRatingService {
+    pub fn new(pg_conn_pool: PgConnPool) -> Self {
+        Self { pg_conn_pool }
+    }
+}
+
+impl traits::EntityService          for NewsRatingService { type Entity = NewsRating; }
+impl traits::CreatableEntityService for NewsRatingService { type EntityNew = NewsRatingNew; }
+impl traits::GetTableName  for NewsRatingService { fn get_table_name(&self) -> &str { "news_ratings" } }
+impl traits::GetPgConnPool for NewsRatingService {
+    fn get_pg_conn_pool(&self) -> PgConnPool {
+        PgConnPool::clone(&self.pg_conn_pool)
+    }
+}
+impl traits::GetPgClientFromPoolInfallible for NewsRatingService {}

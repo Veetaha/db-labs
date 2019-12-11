@@ -1,4 +1,6 @@
+use soa_derive::StructOfArray;
 use anyhow::{Result, Context};
+use fallible_iterator::{FromFallibleIterator, IntoFallibleIterator, FallibleIterator};
 use crate::{
     models::{
         entities::News,
@@ -12,12 +14,44 @@ pub struct NewsService {
     pg_conn_pool: PgConnPool
 }
 
+#[derive(Debug, StructOfArray)]
+#[soa_derive = "Debug"]
+pub struct NewsSearchResult {
+    news: News,
+    highlighted_body: Option<String>
+}
+impl From<pg::Row> for NewsSearchResult {
+    fn from(row: pg::Row) -> Self { Self {
+        highlighted_body: row.get("highlighted_body"),
+        news: News::from(row)
+    } }
+}
+
+impl FromFallibleIterator<pg::Row> for NewsSearchResultVec {
+    
+    fn from_fallible_iter<I>(rows_iterator: I) -> Result<Self, I::Error>
+    where
+        I: IntoFallibleIterator<Item = pg::Row> 
+    {
+        let mut rows_iterator = rows_iterator.into_fallible_iter();
+
+        let mut result = NewsSearchResultVec::new();
+        
+        while let Some(row) = rows_iterator.next()? {
+            result.push(NewsSearchResult::from(row));
+        }
+
+        Ok(result)
+    }
+}
+
+
 impl NewsService {
     pub fn new(pg_conn_pool: PgConnPool) -> Self {
         Self { pg_conn_pool }
     }
 
-    pub fn search(&self, search: &NewsSearch) -> Result<Vec<News>> {
+    pub fn search(&self, search: &NewsSearch) -> Result<NewsSearchResultVec> {
         use traits::*;
         use crate::database::SqlParams;
 
@@ -71,12 +105,14 @@ impl NewsService {
 
         if let Some(body) = &search.body {
             let body_param = params.push(body);
-            select_clauses.push(format!("ts_headline(${}, q) as highlight", body_param));
+            select_clauses.push(format!(
+                "ts_headline(${}, q, 'StartSel = [, \
+                StopSel = ], HighlightAll = true') as highlighted_body", 
+                body_param
+            ));
             from_clauses.push(format!("plainto_tsquery('english', ${}) as q", body_param));
             where_clauses.push("to_tsvector('english', body) @@ q".to_owned());
         }
-
-        use fallible_iterator::{FallibleIterator};
 
         let mut client = self.get_pg_client();
 
@@ -97,9 +133,9 @@ impl NewsService {
 
         // IntoIterator
         let res = client.query_raw(&*query, params)?
-            .map(|row| Ok(News::from(row)))
-            .collect::<Vec<_>>()
+            .collect()
             .context("News service failed to search news.");
+
         res
     }
 

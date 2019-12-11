@@ -4,7 +4,10 @@ use postgres_types::{ToSql, FromSql};
 #[derive(Debug, ToSql, FromSql)]
 #[postgres(name="ratingvalue")]
 pub enum RatingValue {
-    Like, Dislike
+    #[postgres(name="like")]
+    Like,
+    #[postgres(name="dislike")]
+    Dislike
 }
 
 #[derive(Debug)]

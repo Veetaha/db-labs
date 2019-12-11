@@ -1,15 +1,15 @@
 use crate::models::entities::User;
 
 pub fn display_user_by_id(user: &User) {
-    println!("Retrieved user by id: {:?}", user);
+    println!("Retrieved user by id: {:#?}", user);
 }
 
 pub fn display_new_user(user: &User) {
-    println!("New user was created successfully: {:?}", user);
+    println!("New user was created successfully: {:#?}", user);
 }
 
 pub fn display_updated_user(user: &User) {
-    println!("User was updated successfully: {:?}", user);
+    println!("User was updated successfully: {:#?}", user);
 }
 
 pub fn display_user_was_deleted(id: i32, was_deleted: bool) {
