@@ -1,0 +1,26 @@
+[package]
+name = "lab3"
+version = "0.1.0"
+authors = ["Veetaha <gerzoh1@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rand = "0.7.2"
+structopt = "0.3.5"
+anyhow = "1.0.25"
+dotenv = "0.15.0"
+exitcode = "1.1.2"
+human-panic = "1.0.1"
+chrono = "0.4.10"
+bcrypt = "0.6.1"
+soa_derive = "0.8.0"
+diesel = { version = "1.4.3", features = ["postgres", "chrono", "r2d2"] }
+diesel-derive-enum = { version = "0.4.4", features = ["postgres"] }
+serde = "1.0.104"
+serde_derive = "1.0.104"
+envy = "0.4.0"
+
+# [dev-dependencies]
+# diesel_cli = { version = "1.4.0", features = ["postgres"] }

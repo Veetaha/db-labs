@@ -1,0 +1,9 @@
+# For documentation on how to configure this file,
+# see diesel.rs/guides/configuring-diesel-cli
+
+[print_schema]
+file = "src/models/schema.rs"
+import_types = [
+    "diesel::sql_types::*",
+    "crate::models::entities::{UserRoleMapping as Userrole, RatingValueMapping as Ratingvalue}",
+]
