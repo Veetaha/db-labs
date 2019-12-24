@@ -21,8 +21,8 @@ select
         when 5 then 'Veetaha'
     end) as name,
     (case (random())::int
-        when 0 then 'Regular'::UserRole
-        when 1 then 'Admin'::UserRole
+        when 0 then 'regular'::UserRole
+        when 1 then 'admin'::UserRole
     end) as role
 from GENERATE_SERIES(
     (select max(id) from users) + 1,

@@ -46,18 +46,3 @@ impl UserService {
             .context("Failed to delte user by id")
     }
 }
-
-
-// impl traits::UpdatableEntityService for UserService { type EntityUpd = UserUpdate; }
-// impl traits::CreatableEntityService for UserService { type EntityNew = UserNew; }
-
-// impl traits::GetPgConnPool for UserService {
-//     fn get_pg_conn_pool(&self) -> PgConnPool {
-//         // Clone operation is fast and efficient since it is just an atomic reference counter
-//         // under the hood, thus to make it explicit calling `clone()`
-//         // not as a metod but via free function call syntax to make it explicit
-//         PgConnPool::clone(&self.pg_conn_pool)
-//     }
-// }
-// impl traits::GetPgClientFromPoolInfallible for UserService {}
-
