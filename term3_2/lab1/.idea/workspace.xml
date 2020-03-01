@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="953a5180-272f-40a6-b0b0-f46e4ae1ef0b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../lab1/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab1/er-diagram.drawio" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab1/er-diagram.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab1/relations.drawio" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab1/relations.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/Cargo.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/Cargo.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/LICENCE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/diesel.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/docs/create.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/docs/delete.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/docs/global-help.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/docs/search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/docs/task.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/docs/update.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/docs/violation_of_foreign_key_integrity.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/00000000000000_diesel_initial_setup/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/00000000000000_diesel_initial_setup/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-17-201319_create_users_table/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-17-201319_create_users_table/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-17-223648_create_news_table/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-17-223648_create_news_table/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-23-215513_migrate_to_lowercased_role_enum/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-23-215513_migrate_to_lowercased_role_enum/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-23-221455_create_news_comments_table/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-23-221455_create_news_comments_table/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-23-222101_create_news_ratings_table/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-23-222101_create_news_ratings_table/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-23-222915_add_unique_constraint_for_rater_id_and_news_id_on_news_ratings/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-23-222915_add_unique_constraint_for_rater_id_and_news_id_on_news_ratings/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-27-223806_add_title_column_to_news_table/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-27-223806_add_title_column_to_news_table/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-29-235940_migrate_to_pascalcased_role_enum/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-29-235940_migrate_to_pascalcased_role_enum/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-30-001029_migrate_to_pascalcase_user_role_enum_name/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-11-30-001029_migrate_to_pascalcase_user_role_enum_name/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-12-01-232703_create_index_on_news_body_for_fulltext_queries/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-12-01-232703_create_index_on_news_body_for_fulltext_queries/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-12-04-010049_create_news_likes_and_dislikes_views/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-12-04-010049_create_news_likes_and_dislikes_views/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-12-07-004527_create_random_string_function/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/migrations/2019-12-07-004527_create_random_string_function/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/config.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/cli/create/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/cli/create/news.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/cli/create/news_rating.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/cli/create/user.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/cli/delete.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/cli/enums.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/cli/get.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/cli/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/cli/push_random_entities.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/cli/search/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/cli/search/news.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/cli/update/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/cli/update/news.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/cli/update/user.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/global_controller.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/news_controller.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/news_ratings_controller.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/controllers/users_controller.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/database/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/database/pg_conn_mgr.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/database/pg_placeholders_seq.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/database/sql_params.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/lib.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/main.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/entities/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/entities/news.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/entities/news_comment.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/entities/news_rating.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/entities/user.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/services/global_db_service.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/services/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/services/news_comment_service.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/services/news_rating_service.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/services/news_service.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/services/sql/generate_random_users.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/services/user_service.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/traits/col_data.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/traits/create.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/traits/delete_by_id.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/traits/entity_service.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/traits/get_by_id.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/traits/get_id.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/traits/get_pg_client.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/traits/get_pg_conn_pool.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/traits/get_table_name.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/traits/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/models/traits/update_by_id.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/views/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/views/news_rating_view.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/views/news_view.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/src/views/user_view.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/Cargo.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/Cargo.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/LICENCE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/diesel.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/docs/brin-query-plan-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/docs/brin-query-plan-2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/docs/btree-query-plan-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/docs/btree-query-plan-2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/docs/task.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/docs/trigger-result-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/00000000000000_diesel_initial_setup/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/00000000000000_diesel_initial_setup/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-17-201319_create_users_table/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-17-201319_create_users_table/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-17-223648_create_news_table/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-17-223648_create_news_table/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-23-215513_migrate_to_lowercased_role_enum/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-23-215513_migrate_to_lowercased_role_enum/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-23-221455_create_news_comments_table/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-23-221455_create_news_comments_table/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-23-222101_create_news_ratings_table/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-23-222101_create_news_ratings_table/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-23-222915_add_unique_constraint_for_rater_id_and_news_id_on_news_ratings/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-23-222915_add_unique_constraint_for_rater_id_and_news_id_on_news_ratings/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-27-223806_add_title_column_to_news_table/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-27-223806_add_title_column_to_news_table/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-29-235940_migrate_to_pascalcased_role_enum/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-29-235940_migrate_to_pascalcased_role_enum/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-30-001029_migrate_to_pascalcase_user_role_enum_name/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-11-30-001029_migrate_to_pascalcase_user_role_enum_name/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-12-01-232703_create_index_on_news_body_for_fulltext_queries/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-12-01-232703_create_index_on_news_body_for_fulltext_queries/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-12-04-010049_create_news_likes_and_dislikes_views/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-12-04-010049_create_news_likes_and_dislikes_views/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-12-07-004527_create_random_string_function/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-12-07-004527_create_random_string_function/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-12-23-002511_migrate-to-camel-cased-userrole/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-12-23-002511_migrate-to-camel-cased-userrole/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-12-24-005928_create_indexes_on_users/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-12-24-005928_create_indexes_on_users/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-12-24-013628_create_indexes_on_news_ratings/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-12-24-013628_create_indexes_on_news_ratings/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-12-24-104802_create_triggers_on_users/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/migrations/2019-12-24-104802_create_triggers_on_users/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/config.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/cli/create/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/cli/create/news.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/cli/create/news_rating.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/cli/create/user.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/cli/delete.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/cli/enums.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/cli/get.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/cli/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/cli/push_random_entities.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/cli/search/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/cli/search/news.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/cli/update/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/cli/update/news.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/cli/update/user.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/global_controller.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/news_controller.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/news_ratings_controller.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/controllers/users_controller.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/database/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/lib.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/main.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/entities/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/entities/news.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/entities/news_comment.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/entities/news_rating.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/entities/user.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/schema.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/services/global_db_service.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/services/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/services/news_comment_service.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/services/news_rating_service.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/services/news_service.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/services/sql/generate_random_users.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/services/user_service.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/traits/create.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/traits/delete_by_id.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/traits/entity_service.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/traits/get_by_id.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/traits/get_id.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/traits/get_pg_conn.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/traits/get_pg_conn_pool.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/traits/get_table.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/traits/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/models/traits/update_by_id.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/views/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/views/news_rating_view.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/views/news_view.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/views/user_view.rs" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/lab1$task1.coverage" NAME="task1 Coverage Results" MODIFIED="1583073211688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Pipfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="9" column="12" selection-start-line="10" selection-start-column="4" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Pipfile" />
+        <option value="$PROJECT_DIR$/db_lab_1/spiders/ISportSpider.py" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/task1.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="260" />
+    <option name="y" value="53" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="lab1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lab1" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/task1.py" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="lab1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/../../../../studing/python3/.env/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/task1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="task1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="lab1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/../../../../studing/python3/.env/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/task1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.task1" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="953a5180-272f-40a6-b0b0-f46e4ae1ef0b" name="Default Changelist" comment="" />
+      <created>1583071541841</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583071541841</updated>
+      <workItem from="1583071543108" duration="116000" />
+      <workItem from="1583071678270" duration="3627000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="3743000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="25" width="1920" height="1055" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2524013" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32937366" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3574514" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/results/petmarket.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/petmarket.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/petmarket.xslt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scrapy.cfg">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/golosua.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db_lab_1/items.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db_lab_1/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db_lab_1/settings.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db_lab_1/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="6" selection-start-column="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db_lab_1/middlewares.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db_lab_1/spiders/ISportSpider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db_lab_1/spiders/PetMarketSpider.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pipfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="12" selection-start-line="10" selection-start-column="4" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
