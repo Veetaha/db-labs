@@ -107,7 +107,7 @@ impl NewsService {
             let body_param = params.push(body);
             select_clauses.push(format!(
                 "ts_headline(${}, q, 'StartSel = [, \
-                StopSel = ], HighlightAll = true') as highlighted_body", 
+                StopSel = ], HighlightAll = true') as highlighted_body",
                 body_param
             ));
             from_clauses.push(format!("plainto_tsquery('english', ${}) as q", body_param));

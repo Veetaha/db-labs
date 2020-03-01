@@ -25,11 +25,9 @@ def task1():
     print("ISPORT")
     root = etree.parse("../output1.xml")
     pages = root.xpath("//page")
-    print("IMGAGES | URL")
+    print("URLS")
     for page in pages:
-        url = page.xpath("@url")[0]
-        count = page.xpath("count(fragment[@type='image'])")
-        print("%d at %s" % (count, url))
+        print(page.xpath("@url")[0])
 
 
 def task2():
