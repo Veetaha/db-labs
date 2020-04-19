@@ -13,4 +13,10 @@ dotenv = "0.15.0"
 log = "0.4.8"
 env_logger = "0.7.1"
 serde = { version = "1.0.106", features = [ "derive" ] }
-structopt = "0.3.12"
+structopt = "0.3.13"
+threadpool = "1.7.1"
+num_cpus = "1.13.0"
+rand = "0.7.3"
+
+redis_chat = { path = "../redis_chat" }
+fake = "2.2.2"

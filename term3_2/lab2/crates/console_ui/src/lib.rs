@@ -62,7 +62,7 @@ pub enum Params {
 
 #[derive(StructOpt, Debug)]
 #[structopt(group = ArgGroup::with_name("find_user").required(true).multiple(false))]
-struct FindUsers {
+pub struct FindUsers {
     /// Show N most chatty users (whose messages did were delievered)
     #[structopt(long, group = "find_user")]
     most_chatty: Option<u32>,
@@ -96,17 +96,17 @@ pub fn run_ui(params: Params, chat: &mut Chat) -> Result<()> {
             }
         }
         Params::SendMessage { sender, receiver, message } => {
-            chat.send_message(&MessageData::new(message, sender, receiver))?;
+            chat.send_message(MessageData::new(message, sender, receiver))?;
             println!("Message is succesfully sent to processing queue");
         }
         Params::ViewMessages { receiver } => {
             for message in chat.view_messages(&receiver)? {
-                println!("{}", message.data);
+                println!("{}", message);
             }
         }
         Params::ViewEventsJournal => {
-            for event in chat.events_stream()? {
-                println!("{}", event);
+            for event in chat.events_stream()?.iter()? {
+                println!("{}", event?);
             }
         }
         Params::OnlineUsers => {
@@ -118,12 +118,12 @@ pub fn run_ui(params: Params, chat: &mut Chat) -> Result<()> {
         }
         Params::FindUsers(FindUsers { most_chatty: Some(most_chatty), .. }) => {
             println!("Most chatty users:");
-            for stat in chat.top_n_most_chatty_users(most_chatty) {
+            for stat in chat.top_n_most_chatty_users(most_chatty)? {
                 println!("- {}", stat);
             }
         }
         Params::FindUsers(FindUsers { most_spammy: Some(most_spammy), .. }) => {
-            for stat in chat.top_n_most_spammy_users(most_spammy) {
+            for stat in chat.top_n_most_spammy_users(most_spammy)? {
                 println!("- {}", stat);
             }
         }

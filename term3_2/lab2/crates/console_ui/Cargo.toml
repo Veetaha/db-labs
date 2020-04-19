@@ -13,6 +13,6 @@ dotenv = "0.15.0"
 log = "0.4.8"
 env_logger = "0.7.1"
 serde = { version = "1.0.106", features = [ "derive" ] }
-structopt = "0.3.12"
+structopt = "0.3.13"
 
 redis_chat = { path = "../redis_chat" }

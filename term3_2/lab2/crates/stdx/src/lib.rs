@@ -1,4 +1,3 @@
-
 use std::{cell::Cell, fmt};
 
 pub fn display_with<F>(f: F) -> DisplayWith<F>

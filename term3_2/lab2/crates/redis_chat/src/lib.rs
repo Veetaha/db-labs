@@ -1,9 +1,12 @@
+#![allow(unused)]
+
 use std::{fmt, collections::HashMap};
 use anyhow::{Result, Context};
 use uuid::Uuid;
 use redis::Commands;
 use stdx::SepBy;
 
+#[derive(Clone)]
 pub struct Chat {
     redis: redis::Client,
 }
@@ -55,6 +58,12 @@ impl Message {
         Self {
             data,
             id: uuid::Uuid::new_v4()
+        }
+    }
+    fn with_id(id: &str, data: MessageData) -> Message {
+        Self {
+            data,
+            id: uuid::Uuid::parse_str(id).unwrap(),
         }
     }
 }
@@ -121,7 +130,7 @@ pub enum LoginResult {
     Success
 }
 
-struct UserMsgStat {
+pub struct UserMsgStat {
     login: String,
     n_messages: u32,
 }
@@ -131,7 +140,7 @@ impl fmt::Display for UserMsgStat {
     }
 }
 
-struct MsgsStat {
+pub struct MsgsStat {
     enqd: Vec<MessageData>,
     checking_for_spam: Vec<MessageData>,
     spam: Vec<MessageData>,
@@ -142,10 +151,10 @@ impl fmt::Display for MsgsStat {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         writeln!(
             f,
-            "Enqueued:\n{}\
-            Checking for spam:\n{}\
-            Spam:\n{}\
-            Delivered:\n{}",
+            "Enqueued:\n{}\n\
+            Checking for spam:\n{}\n\
+            Spam:\n{}\n\
+            Delivered:\n{}\n",
             self.enqd.iter().sep_by("\n"),
             self.checking_for_spam.iter().sep_by("\n"),
             self.spam.iter().sep_by("\n"),
@@ -155,16 +164,16 @@ impl fmt::Display for MsgsStat {
 }
 
 
-struct EventsIterable(redis::Connection);
+pub struct EventsIterable(redis::Connection);
 impl EventsIterable {
-    fn iter(&mut self) -> Result<EventsIterator<'_>> {
+    pub fn iter(&mut self) -> Result<EventsIterator<'_>> {
         let mut pubsub = self.0.as_pubsub();
         pubsub.subscribe(Chat::EVENT_JOURNAL_CHANNEL)?;
         Ok(EventsIterator(pubsub))
     }
 }
 
-struct EventsIterator<'a>(redis::PubSub<'a>);
+pub struct EventsIterator<'a>(redis::PubSub<'a>);
 impl Iterator for EventsIterator<'_> {
     type Item = Result<String>;
 
@@ -185,9 +194,12 @@ impl Chat {
     const ADMIN_USERS_SET_KEY: &'static str = "admin_users";
     const EVENT_JOURNAL_CHANNEL: &'static str = "event_journal";
 
+    const USERS_BY_DELIVERED_MSG_COUNT_ZLIST_KEY: &'static str = "users_by_delivered_msg";
+    const USERS_BY_SPAM_MSG_COUNT_ZLIST_KEY: &'static str = "users_by_spam_msg";
+
     const MESSAGES_QUE_LIST_KEY: &'static str = "messages_que";
     const MESSAGES_QUE_SET_KEY: &'static str = "messages:que";
-    const MESSRedisAGES_CHECKING_FOR_SPAM_SET_KEY: &'static str = "messages:checking_for_spam";
+    const MESSAGES_CHECKING_FOR_SPAM_SET_KEY: &'static str = "messages:checking_for_spam";
     const MESSAGES_SPAM_SET_KEY: &'static str = "messages:spam";
     const MESSAGES_SENT_SET_KEY: &'static str = "messages:sent";
     const MESSAGES_DELIVERD_SET_KEY: &'static str = "messages:delivered";
@@ -200,8 +212,8 @@ impl Chat {
         format!("incomming_messages:{}", user_login)
     }
 
-    fn message_hash_map_key(msg: &Message) -> String {
-        format!("message:{}", msg.id)
+    fn message_hash_map_key(msg_id: impl std::fmt::Display) -> String {
+        format!("message:{}", msg_id)
     }
 
 
@@ -214,9 +226,10 @@ impl Chat {
     pub fn login(&mut self, user_login: &str, role: UserRole) -> Result<LoginResult> {
         let event = ChatEvent::UserLoggedIn(user_login.to_owned());
 
-        let n_added: u32 = redis::pipe()
+        let (n_added,): (u32,) = redis::pipe()
             .atomic()
-            .sadd(Chat::role_to_users_by_role_set_key(role), user_login)
+            .sadd(Chat::role_to_users_by_role_set_key(role), user_login).ignore()
+            .sadd(Chat::ONLINE_USERS_SET_KEY, user_login)
             .publish(
                 Chat::EVENT_JOURNAL_CHANNEL,
                 event.publish_message().to_string()
@@ -245,6 +258,7 @@ impl Chat {
             .atomic()
             .srem(Chat::REGULAR_USERS_SET_KEY, user_login)
             .srem(Chat::ADMIN_USERS_SET_KEY, user_login)
+            .srem(Chat::ONLINE_USERS_SET_KEY, user_login).ignore()
             .publish(
                 Chat::EVENT_JOURNAL_CHANNEL,
                 event.publish_message().to_string()
@@ -267,8 +281,8 @@ impl Chat {
 
         let _: () = redis::pipe()
             .atomic()
-            .hset_multiple(Chat::message_hash_map_key(&msg), &msg.data.clone().to_hash_map())
-            .lpush(Chat::MESSAGES_QUE_LIST_KEY, &id).ignore()
+            .hset_multiple(Chat::message_hash_map_key(msg.id), &msg.data.clone().to_hash_map())
+            .rpush(Chat::MESSAGES_QUE_LIST_KEY, &id).ignore()
             .sadd(Chat::MESSAGES_QUE_SET_KEY, &id).ignore()
             .sadd(sender_outcomming_set_key, &id).ignore()
             .query(&mut self.redis)?;
@@ -281,7 +295,9 @@ impl Chat {
         let msg_ids: Vec<String> = self.redis.lrange(list_key, 0, -1)?;
         let msg_hash_maps: Vec<HashMap<String, String>> = msg_ids
             .iter()
-            .fold(redis::pipe().atomic(), |pipe, msg_id| pipe.hgetall(msg_id))
+            .fold(redis::pipe().atomic(), |pipe, msg_id| {
+                pipe.hgetall(Chat::message_hash_map_key(msg_id))
+            })
             .query(&mut self.redis)?;
 
         Ok(msg_hash_maps.into_iter().map(MessageData::from_hash_map).collect())
@@ -292,17 +308,124 @@ impl Chat {
     }
 
     pub fn users_online(&mut self) -> Result<Vec<String>> {
-        todo!()
+        self.redis.smembers(Chat::ONLINE_USERS_SET_KEY).context("SMEMBERS failed")
+    }
+
+    fn top_n_users_by_messages(&mut self, n: u32, zlist_key: &str) -> Result<Vec<UserMsgStat>> {
+        if n == 0 {
+            return Ok(vec![]);
+        }
+
+        let stat: Vec<(String, u32)> = self.redis.zrevrange_withscores(
+            zlist_key,
+            0,
+            (n as isize) - 1
+        )?;
+
+        let res = stat
+            .into_iter()
+            .map(|(login, n_messages)| UserMsgStat { login, n_messages })
+            .collect();
+
+        Ok(res)
     }
 
     pub fn top_n_most_chatty_users(&mut self, n: u32) -> Result<Vec<UserMsgStat>> {
-        todo!()
+        self.top_n_users_by_messages(n, Chat::USERS_BY_DELIVERED_MSG_COUNT_ZLIST_KEY)
     }
+
     pub fn top_n_most_spammy_users(&mut self, n: u32) -> Result<Vec<UserMsgStat>> {
-        todo!()
+        self.top_n_users_by_messages(n, Chat::USERS_BY_SPAM_MSG_COUNT_ZLIST_KEY)
     }
 
     pub fn outcomming_messages_stat(&mut self, sender_login: &str) -> Result<MsgsStat> {
-        todo!()
+        let status_set_keys = [
+            Chat::MESSAGES_QUE_SET_KEY,
+            Chat::MESSAGES_CHECKING_FOR_SPAM_SET_KEY,
+            Chat::MESSAGES_SPAM_SET_KEY,
+            Chat::MESSAGES_DELIVERD_SET_KEY,
+        ];
+
+        let outcomming_msgs_key = Chat::outcomming_messages_set_key_for_user(sender_login);
+
+        let ids_per_status: Vec<Vec<String>> = status_set_keys
+            .iter()
+            .fold(redis::pipe().atomic(), |pipe, &status_set_key| {
+                pipe.sinter((&outcomming_msgs_key, status_set_key))
+            })
+            .query(&mut self.redis)?;
+
+
+        let mut msgs: Vec<HashMap<String, String>> = ids_per_status
+            .iter()
+            .flatten()
+            .fold(redis::pipe().atomic(), |pipe, id| {
+                pipe.hgetall(Chat::message_hash_map_key(id))
+            })
+            .query(&mut self.redis)?;
+
+        let mut msgs = msgs.drain(..);
+
+        let mut vecs = ids_per_status
+            .iter()
+            .map(|ids_vec| ids_vec
+                .iter()
+                .map(|_|MessageData::from_hash_map(msgs.next().unwrap()))
+                .collect()
+            );
+
+        let mut next = || vecs.next().unwrap();
+
+        let enqd = next();
+        let checking_for_spam = next();
+        let spam = next();
+        let delivered = next();
+
+        Ok(MsgsStat { enqd, checking_for_spam, spam, delivered })
     }
+
+    pub fn check_msg_for_spam(&mut self) -> Result<Option<bool>> {
+        let msg_id: Option<String> = self.redis
+            .lpop(Chat::MESSAGES_QUE_LIST_KEY)?;
+
+        let msg_id = match msg_id {
+            Some(it) => it,
+            None => return Ok(None)
+        };
+
+        let (msg_hash,): (HashMap<String, String>,) = redis::pipe()
+            .atomic()
+            .srem(Chat::MESSAGES_QUE_SET_KEY, &msg_id).ignore()
+            .sadd(Chat::MESSAGES_CHECKING_FOR_SPAM_SET_KEY, &msg_id).ignore()
+            .hgetall(Chat::message_hash_map_key(&msg_id))
+            .query(&mut self.redis)?;
+
+        let msg = MessageData::from_hash_map(msg_hash);
+
+        let is_spam: bool = rand::random();
+
+        if is_spam {
+            redis::pipe()
+                .atomic()
+                .srem(Chat::MESSAGES_CHECKING_FOR_SPAM_SET_KEY, &msg_id)
+                .sadd(Chat::MESSAGES_SPAM_SET_KEY, &msg_id)
+                .zincr(Chat::USERS_BY_SPAM_MSG_COUNT_ZLIST_KEY, &msg.sender, 1)
+                .publish(
+                    Chat::EVENT_JOURNAL_CHANNEL,
+                    ChatEvent::SpamDetected(Message::with_id(&msg_id, msg)).to_string()
+                )
+                .query(&mut self.redis)?;
+        } else {
+            redis::pipe()
+                .atomic()
+                .srem(Chat::MESSAGES_CHECKING_FOR_SPAM_SET_KEY, &msg_id)
+                .sadd(Chat::MESSAGES_DELIVERD_SET_KEY, &msg_id)
+                .zincr(Chat::USERS_BY_DELIVERED_MSG_COUNT_ZLIST_KEY, &msg.sender, 1)
+                .lpush(Chat::incomming_messages_list_key_for_user(&msg.receiver), &msg_id)
+                .query(&mut self.redis)?;
+        }
+
+        Ok(Some(is_spam))
+    }
+
 }

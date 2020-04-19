@@ -18,6 +18,6 @@ fn main() -> Result<()> {
     let params = console_ui::Params::from_args();
     log::debug!("Using params {:?}", params);
 
-    let redis_url = format!("127.0.0.1:{}", env_vars.redis_port);
-    console_ui::run_ui(params, redis_chat::Chat::new(&redis_url)?)
+    let redis_url = format!("redis://127.0.0.1:{}", env_vars.redis_port);
+    console_ui::run_ui(params, &mut redis_chat::Chat::new(&redis_url)?)
 }

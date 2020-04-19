@@ -11,5 +11,6 @@ redis = "0.15.1"
 anyhow = "1.0.28"
 log = "0.4.8"
 uuid = { version = "0.8.1", features = ["v4"] }
+rand = "0.7.3"
 
 stdx = { path = "../stdx" }
