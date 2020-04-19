@@ -14,7 +14,7 @@
 
 Data structures used in this lab:
 
-- *SET*: set is used for quick lookups and tests for membership and to store data
+- **SET**: set is used for quick lookups and tests for membership and to store data
 that must be unique in no specific order.
 Based on these features it was used to store the logins of users that are online
 because they must be unique, to store user logins by their role in order to get
