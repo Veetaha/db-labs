@@ -2,12 +2,33 @@
 
 ## Bootstrap
 
+### Installation
+
+The following script downloads and runs the linux binaries `console_ui` and `worker`
+from GitHub releases. Make sure to run it the root of the repo or manually add
+`$REDIS_PORT` env variable.
+
+```
+./bootstrap.sh
+```
+
+
 ### Prerequisties
+
+Docker and docker-compose are optional, you can run your own Redis cluster/
+Just make sure change a `.env` to specify the redis port.
 
 * [docker](https://docs.docker.com/install/)
 * [docker-compose](https://docs.docker.com/compose/install/)
 * [rustc and cargo](https://www.rust-lang.org/tools/install)
 
+### Compile and run from sources
+
+You can build and run the console ui or worker with `--help` args with these commands
+```
+cargo run -p console_ui -- --help
+cargo run -p worker -- --help
+```
 
 ## Redis layout
 ![](https://user-images.githubusercontent.com/36276403/79699035-6e456100-8295-11ea-9b72-2eb024a71cdf.png)
