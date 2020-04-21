@@ -5,7 +5,7 @@
 ### Installation
 
 The following script downloads and runs the linux binaries `console_ui` and `worker`
-from GitHub releases. Make sure to run it the root of the repo or manually add
+from GitHub releases. Make sure to run it in the root of the repo or manually add
 `$REDIS_PORT` env variable.
 
 ```
