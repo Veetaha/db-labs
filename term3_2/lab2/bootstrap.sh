@@ -5,8 +5,8 @@ sudo chmod +x console_ui
 # Download worker
 curl https://github.com/Veetaha/db-labs/releases/download/v0.1/worker -L --output worker
 sudo chmod +x worker
-./worker
-./console_ui
+./worker --help
+./console_ui --help
 
 
 
