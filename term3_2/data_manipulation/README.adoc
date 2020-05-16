@@ -2,12 +2,26 @@
 
 = Data manipulation course
 
+https://coursera.org/share/0e8cea671a8f0968bd79a59a0d06a0c9[Certificate url]
+
+image::certificate.png[]
 
 == week1
 
 image::./week1.png[]
 
-
 == week2
 
 image::week2.png[]
+
+== week3
+
+image::week3.png[]
+
+== week4
+
+image::week4.png[]
+
+== Grades
+
+image::grades.png[]
