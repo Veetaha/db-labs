@@ -8,7 +8,7 @@ edition = "2018"
 
 [dependencies]
 rand = "0.7.2"
-tokio = "0.2.3"
+tokio = "1.8.4"
 structopt = "0.3.5"
 anyhow = "1.0.25"
 thiserror = "1.0.9"
