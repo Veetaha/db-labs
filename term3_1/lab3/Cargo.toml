@@ -16,7 +16,7 @@ human-panic = "1.0.1"
 chrono = "0.4.10"
 bcrypt = "0.6.1"
 soa_derive = "0.8.0"
-diesel = { version = "1.4.3", features = ["postgres", "chrono", "r2d2"] }
+diesel = { version = "1.4.6", features = ["postgres", "chrono", "r2d2"] }
 diesel-derive-enum = { version = "0.4.4", features = ["postgres"] }
 serde = "1.0.104"
 serde_derive = "1.0.104"
